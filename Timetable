@@ -1,0 +1,64 @@
+        static void Timetable()
+        {
+            decimal start = 0; //Provides a way to create a start of unavailable time
+            decimal end = 0; //Provides a way to create an end of unavailable time
+            string[] week = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }; //Creates an array of the week so as to be able to loop through every day of the week
+            for (int days = 0; days < week.Length; days++) //Loops through every day of the week
+            {
+                
+                bool done = false;
+                do //This do while loop makes sure to continue until the end of the week, which will be indicated by done turning true
+                {
+                    Console.WriteLine("Do you any activities on " + week[days] + " Please return in caps"); //Asks the user about any activites they may have on the day
+                    string activities = Console.ReadLine(); 
+                    if (activities == "NO")
+                    {
+
+                        break; //This exits the do loop straight away but stays in the for loop
+
+                    }
+                    else if (activities == "YES")
+                    {
+                        Console.WriteLine("What time does it start?");
+                        start = Convert.ToDecimal(Console.ReadLine()); // Inputs the start time of whatever activity they have
+                        Console.WriteLine("What time does it end?");
+                        end = Convert.ToDecimal(Console.ReadLine());//Input the end time of what ever activity they have
+                        do //This do while loops going until they have no more activities. As long as the user inputs YES it wil continue to loop back until they input NO
+                        {
+                            Console.WriteLine("Do you have any more activies after this? In caps");
+                            activities = Console.ReadLine();
+                            if (activities == "YES")
+                            {
+                                Console.WriteLine("What time does it start?");
+                                start = Convert.ToDecimal(Console.ReadLine());
+                                Console.WriteLine("What time does it end?");
+                                end = Convert.ToDecimal(Console.ReadLine());
+
+                            }
+                            else if (activities == "NO")
+                            {
+                                //days++;
+                                break;
+                            }
+                        } while (activities == "YES"); 
+
+                        days++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    done = true;
+                } while (done == true);
+                string block = start + " to " + end; //This creates a block for the start to the end
+                string[,] timetable = new string[100,7]; //This will create a 2D array encomposed of 7 columns, one for each day, and 100 rows
+                for (int row = 0; row < timetable.GetLength(0); row++)
+                {
+                    for (int column = 0; column < timetable.GetLength(1); column++)
+                    {
+                        timetable[row, column] = block; //This will create a 2D array encomposed of the "block" of unavailable time
+                    }
+                }
+
+            }
+        }
