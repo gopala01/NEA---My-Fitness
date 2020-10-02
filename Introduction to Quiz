@@ -1,0 +1,27 @@
+static void Main(string[] args)
+        {
+            Console.WriteLine("Hi what is your name?");
+            string name = Console.ReadLine();
+            Console.WriteLine("Hi " + name + " Welcome to MyFitness!");
+            Console.WriteLine("What is your current weight?");
+            int currentWeight = Convert.ToInt32(Console.ReadLine());
+            while (currentWeight > 200 || currentWeight < 50)
+            {
+
+                Console.WriteLine("Please enter a sensible weight");
+                Console.WriteLine("What is your current weight?");
+                currentWeight = Convert.ToInt32(Console.ReadLine());
+            }
+
+        }
+
+        static void WeightLoss()
+        {
+
+        }
+
+        static void WeightGain()
+        {
+
+        }
+       
