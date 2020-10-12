@@ -1,27 +1,70 @@
-static void Main(string[] args)
+ /*
+     Tasks to do / Notes:
+     * 1. Loop back to previous question if nothing input - Error checking methods
+     * 2. Add algorithm to exercise fpr weight loss
+     * 3. Do I really need weight gain exercise?
+     */
+    class Program
+    {
+       
+        
+        static void Main(string[] args)
         {
-            Console.WriteLine("Hi what is your name?");
+
+            Console.WriteLine("Hi what is your name?"); // This name will be the basis of how a user will be called for the rest of their time using the app
             string name = Console.ReadLine();
             Console.WriteLine("Hi " + name + " Welcome to MyFitness!");
             Console.WriteLine("What is your current weight?");
-            int currentWeight = Convert.ToInt32(Console.ReadLine());
+            int currentWeight = Convert.ToInt32(Console.ReadLine()); // These two lines will have user input their current weight and be read to the app
+            //Error checking - Do task 1
             while (currentWeight > 200 || currentWeight < 50)
             {
-
                 Console.WriteLine("Please enter a sensible weight");
+                Console.WriteLine("What is your current weight?");
+                currentWeight = Convert.ToInt32(Console.ReadLine());
+            } //This error checking method makes sure the weight is a sensible weight, incase the user decides to put a ridiculous weight that maybe too high or too low
+            string currentWeightToString = currentWeight.ToString();
+            if (currentWeightToString == " ")
+            {
+                Console.WriteLine("Please enter a weight");
                 Console.WriteLine("What is your current weight?");
                 currentWeight = Convert.ToInt32(Console.ReadLine());
             }
 
-        }
+            Console.WriteLine("What is your end goal?");
+            int endGoal = Convert.ToInt32(Console.ReadLine());
+            while (endGoal > 200 || endGoal < 50)
+            {
 
-        static void WeightLoss()
+                Console.WriteLine("Please enter a sensible weight");
+                Console.WriteLine("What is your end goal?");
+                endGoal = Convert.ToInt32(Console.ReadLine());
+            }
+            int changeOfWeight = currentWeight - endGoal;
+            if (currentWeight > endGoal)
+            {
+                WeightLoss(currentWeight, endGoal, changeOfWeight); //If the current weight is greater than the end goal this indicates that the user is trying to lose weight, therefore it takes them to the WeightLoss function
+            }
+            else
+            {
+                WeightGain(currentWeight, endGoal, changeOfWeight); //If the current weight is less than the end goal this indicates that the user is trying to gain weight, therefore it takes them to the WeightGain function
+            }
+
+        }
+        static void WeightLoss(int current, int end, int change) 
         {
-
+            Console.WriteLine("So you're trying to lose weight then? Dont worry, you're in safe hands here!");
+            Console.WriteLine("You're trying to lose " + change + " kg?");
+            
         }
 
-        static void WeightGain()
+        static void WeightGain(int current, int end, int change)
         {
+            Console.WriteLine("So you're trying to gain weight then? Dont worry, you're in safe hands here!");
+            Console.WriteLine("You're trying to gain " + -change + " kg?");
 
         }
-       
+
+
+
+    }
