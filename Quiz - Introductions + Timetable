@@ -1,0 +1,167 @@
+using System;
+
+namespace Quiz
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hi what is your name?"); // This name will be the basis of how a user will be called for the rest of their time using the app
+            string name = Console.ReadLine();
+
+            while (name == "")
+            {
+                Console.WriteLine("Please enter your name");
+                name = Console.ReadLine();
+            } //This while statement deals with anyone deciding to leave it blank, looping back until they put their name
+            while (name.Length == 1)
+            {
+                Console.WriteLine("Please enter a sensible name");
+                name = Console.ReadLine();
+            } //This while statement deals with users deciding to only put one letter, looping back until they put their name
+
+
+            Console.WriteLine("Hi " + name + " Welcome to MyFitness!");
+            Console.WriteLine("What is your current weight?");
+            int currentWeight = Convert.ToInt32(Console.ReadLine()); // These two lines will have user input their current weight and be read to the app
+
+
+            //Error checking - Do task 1
+            while (currentWeight > 200 || currentWeight < 50)
+            {
+                Console.WriteLine("Please enter a sensible weight");
+                Console.WriteLine("What is your current weight?");
+                currentWeight = Convert.ToInt32(Console.ReadLine());
+            } //This error checking method makes sure the weight is a sensible weight, incase the user decides to put a ridiculous weight that maybe too high or too low
+            while (currentWeight.Equals(" "))
+            {
+                Console.WriteLine("Please enter a weight");
+                Console.WriteLine("What is your current weight?");
+                currentWeight = Convert.ToInt32(Console.ReadLine());
+            }
+
+
+            //string currentWeightString = currentWeight.ToString();
+            //while (currentWeightString.Length == 0)
+            //{
+            //    Console.WriteLine("Please enter a weight");
+            //    Console.WriteLine("What is your current weight?");
+            //    currentWeight = Convert.ToInt32(Console.ReadLine());
+            //}
+
+
+            Console.WriteLine("What is your end goal?");
+            int endGoal = Convert.ToInt32(Console.ReadLine());
+            while (endGoal > 200 || endGoal < 50)
+            {
+
+                Console.WriteLine("Please enter a sensible weight");
+                Console.WriteLine("What is your end goal?");
+                endGoal = Convert.ToInt32(Console.ReadLine());
+            }
+            int changeOfWeight = currentWeight - endGoal;
+            if (currentWeight > endGoal)
+            {
+                WeightLoss(currentWeight, endGoal, changeOfWeight); //If the current weight is greater than the end goal this indicates that the user is trying to lose weight, therefore it takes them to the WeightLoss function
+            }
+            else
+            {
+                WeightGain(currentWeight, endGoal, changeOfWeight); //If the current weight is less than the end goal this indicates that the user is trying to gain weight, therefore it takes them to the WeightGain function
+            }
+
+            Timetable();
+        } // End of main
+
+        static void WeightLoss(int current, int end, int change) //These parameters are used so as to use the variables currentWeight, endGoal and changeOfWeight in these functions
+        {
+            string e1 = "Press Ups";
+            string e2 = "Sit Ups";
+            string e3 = "Mountain Climbers";
+            string e4 = "Squats";
+            int NoOfe1 = (change * 3 / 2);
+            int NoOfe2 = change * 5 / 2;
+            int NoOfe3 = change;
+            int NoOfe4 = change * 5 / 2;
+
+
+            Console.WriteLine("So you're trying to lose weight then? Dont worry, you're in safe hands here!");
+            Console.WriteLine("I see that you're trying to lose " + change + " kg");
+            Console.WriteLine("The recommended amount of exercise is :");
+            Console.WriteLine(e1 + NoOfe1);
+            Console.WriteLine(e2 + NoOfe2);
+            Console.WriteLine(e3 + NoOfe3);
+            Console.WriteLine(e4 + NoOfe4);
+        } //End of Weight Loss
+
+        static void WeightGain(int current, int end, int change)
+        {
+            Console.WriteLine("So you're trying to gain weight then? Dont worry, you're in safe hands here!");
+            Console.WriteLine("You're trying to gain " + -change + " kg?");
+        } //End of WeightGain
+
+        static void Timetable()
+        {
+            decimal start = 0; //Provides a way to create a start of unavailable time
+            decimal end = 0; //Provides a way to create an end of unavailable time
+            string[] week = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }; //Creates an array of the week so as to be able to loop through every day of the week
+            for (int days = 0; days < week.Length; days++) //Loops through every day of the week
+            {
+
+                bool done = false;
+                do //This do while loop makes sure to continue until the end of the week, which will be indicated by done turning true
+                {
+                    Console.WriteLine("Do you any activities on " + week[days] + " Please return in caps"); //Asks the user about any activites they may have on the day
+                    string activities = Console.ReadLine();
+                    if (activities == "NO")
+                    {
+
+                        break; //This exits the do loop straight away but stays in the for loop
+
+                    }
+                    else if (activities == "YES")
+                    {
+                        Console.WriteLine("What time does it start?");
+                        start = Convert.ToDecimal(Console.ReadLine()); // Inputs the start time of whatever activity they have
+                        Console.WriteLine("What time does it end?");
+                        end = Convert.ToDecimal(Console.ReadLine());//Input the end time of what ever activity they have
+                        do //This do while loops going until they have no more activities. As long as the user inputs YES it wil continue to loop back until they input NO
+                        {
+                            Console.WriteLine("Do you have any more activies after this? In caps");
+                            activities = Console.ReadLine();
+                            if (activities == "YES")
+                            {
+                                Console.WriteLine("What time does it start?");
+                                start = Convert.ToDecimal(Console.ReadLine());
+                                Console.WriteLine("What time does it end?");
+                                end = Convert.ToDecimal(Console.ReadLine());
+
+                            }
+                            else if (activities == "NO")
+                            {
+                                //days++;
+                                break;
+                            }
+                        } while (activities == "YES");
+
+                        days++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    done = true;
+                } while (done == true);
+                string block = start + " to " + end; //This creates a block for the start to the end
+                string[,] timetable = new string[100, 7]; //This will create a 2D array encomposed of 7 columns, one for each day, and 100 rows
+                for (int row = 0; row < timetable.GetLength(0); row++)
+                {
+                    for (int column = 0; column < timetable.GetLength(1); column++)
+                    {
+                        timetable[row, column] = block; //This will create a 2D array encomposed of the "block" of unavailable time
+                    }
+                }
+            }
+        } // End of timetable
+    }
+}
+
