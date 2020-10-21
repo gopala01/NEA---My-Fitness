@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Quiz
 {
@@ -23,30 +27,30 @@ namespace Quiz
 
             Console.WriteLine("Hi " + name + " Welcome to MyFitness!");
             Console.WriteLine("What is your current weight?");
-            int currentWeight = Convert.ToInt32(Console.ReadLine()); // These two lines will have user input their current weight and be read to the app
+            int startWeight = Convert.ToInt32(Console.ReadLine()); // These two lines will have user input their current weight and be read to the app
 
 
             //Error checking - Do task 1
-            while (currentWeight > 200 || currentWeight < 50)
+            while (startWeight > 200 || startWeight < 50)
             {
                 Console.WriteLine("Please enter a sensible weight");
                 Console.WriteLine("What is your current weight?");
-                currentWeight = Convert.ToInt32(Console.ReadLine());
+                startWeight = Convert.ToInt32(Console.ReadLine());
             } //This error checking method makes sure the weight is a sensible weight, incase the user decides to put a ridiculous weight that maybe too high or too low
-            while (currentWeight.Equals(" "))
+            while (startWeight.Equals(" "))
             {
                 Console.WriteLine("Please enter a weight");
                 Console.WriteLine("What is your current weight?");
-                currentWeight = Convert.ToInt32(Console.ReadLine());
+                startWeight = Convert.ToInt32(Console.ReadLine());
             }
 
 
-            //string currentWeightString = currentWeight.ToString();
-            //while (currentWeightString.Length == 0)
+            //string startWeightString = startWeight.ToString();
+            //while (startWeightString.Length == 0)
             //{
             //    Console.WriteLine("Please enter a weight");
             //    Console.WriteLine("What is your current weight?");
-            //    currentWeight = Convert.ToInt32(Console.ReadLine());
+            //    startWeight = Convert.ToInt32(Console.ReadLine());
             //}
 
 
@@ -59,20 +63,20 @@ namespace Quiz
                 Console.WriteLine("What is your end goal?");
                 endGoal = Convert.ToInt32(Console.ReadLine());
             }
-            int changeOfWeight = currentWeight - endGoal;
-            if (currentWeight > endGoal)
+            int changeOfWeight = startWeight - endGoal;
+            if (startWeight > endGoal)
             {
-                WeightLoss(currentWeight, endGoal, changeOfWeight); //If the current weight is greater than the end goal this indicates that the user is trying to lose weight, therefore it takes them to the WeightLoss function
+                WeightLoss(startWeight, endGoal, changeOfWeight); //If the current weight is greater than the end goal this indicates that the user is trying to lose weight, therefore it takes them to the WeightLoss function
             }
             else
             {
-                WeightGain(currentWeight, endGoal, changeOfWeight); //If the current weight is less than the end goal this indicates that the user is trying to gain weight, therefore it takes them to the WeightGain function
+                WeightGain(startWeight, endGoal, changeOfWeight); //If the current weight is less than the end goal this indicates that the user is trying to gain weight, therefore it takes them to the WeightGain function
             }
 
             Timetable();
         } // End of main
 
-        static void WeightLoss(int current, int end, int change) //These parameters are used so as to use the variables currentWeight, endGoal and changeOfWeight in these functions
+        static void WeightLoss(int current, int end, int change) //These parameters are used so as to use the variables startWeight, endGoal and changeOfWeight in these functions
         {
             string e1 = "Press Ups";
             string e2 = "Sit Ups";
@@ -164,4 +168,3 @@ namespace Quiz
         } // End of timetable
     }
 }
-
